@@ -8,6 +8,7 @@ using namespace std;
 
 FS::FS(int disk_size, int mem_size) {
 	this->mem = new Memory(mem_size);
+	this->disk = new Disk(disk_size);
 }
 
 /**
@@ -24,7 +25,9 @@ void FS::insert(Page page) {
 	{
 		// Remove the last page and update it in the disk
 		Page lru_page = this->mem->remove();
+
 		// Disk update code goes here
+		this->disk->update(lru_page);
 	}
 
 }
@@ -32,6 +35,10 @@ void FS::insert(Page page) {
 /**
  * @brief      Prints memory of filesystem
  */
-void FS::print_mem() {
+void FS::print() {
+	cout<<"Printing Memory Contents:"<<endl;
 	this->mem->print();
+
+	cout<<"Printing disk:"<<endl;
+	this->disk->print();
 }

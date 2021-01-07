@@ -1,5 +1,5 @@
 compile: 
-	g++ main.cpp fs.cpp page.cpp memory.cpp  -o main
+	g++ main.cpp fs.cpp page.cpp memory.cpp disk.cpp -o main
 
 all:
 	make compile

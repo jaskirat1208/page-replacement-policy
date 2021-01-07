@@ -16,9 +16,9 @@ Page: entity of file system
 
 using namespace std;
 
-int NPages = 100;
-int NQueries = 10000;
-int NPagesInMem = 10;
+int NPages = 10;
+int NQueries = 10;
+int NPagesInMem = 2;
 
 int main(int argc, char const *argv[])
 {
@@ -33,9 +33,9 @@ int main(int argc, char const *argv[])
 		// Update page in file system. Performs an in-memory update, 
 		// when the page goes out of memory due to more recent updates on other pages, the page will be updated on the disk.  
 		fs.insert(page);
-		// Print cache
+		// Print memory
+		fs.print();
 	}
-	fs.print_mem();
 
 	return 0;
 }
