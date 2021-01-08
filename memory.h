@@ -1,4 +1,5 @@
-#include <queue>
+#include <list>
+#include <unordered_map>
 
 #include "page.h"
 using namespace std;
@@ -27,7 +28,10 @@ class Memory
 		// Size of the memory
 		int size;
 		// Queue of Pages
-		queue<Page> pages_queue;
+		list<Page> pages_queue;
+
+		// Hash Map for page to memory location
+		unordered_map<int, list<Page>::iterator> mp;
 };
 
 #endif

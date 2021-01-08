@@ -1,4 +1,5 @@
-#include <queue>
+#include <iostream>
+#include <list>
 #include "memory.h"
 
 using namespace std;
@@ -18,7 +19,18 @@ Memory::Memory(int size) {
  * @param[in]  page  The page
  */
 void Memory::insert(Page page) {
-	this->pages_queue.push(page);
+	int page_num = page.get_page_num();
+	
+	// If page is present in the memory
+	if (mp.find(page_num) != mp.end())
+	{
+		// Remove the page from memory and create a new page 
+		this->pages_queue.erase(mp[page_num]);	
+	}
+
+	// Insert at the beginning and update page pointer
+	this->pages_queue.push_front(page);
+	mp[page_num] = this->pages_queue.begin();
 }
 
 /**
@@ -27,8 +39,11 @@ void Memory::insert(Page page) {
  * @return     { description_of_the_return_value }
  */
 Page Memory::remove() {
-	Page lru_page = this->pages_queue.front();
-	this->pages_queue.pop();
+
+	Page lru_page = this->pages_queue.back();
+	this->mp.erase(lru_page.get_page_num());
+	this->pages_queue.pop_back();
+	
 	return lru_page;
 }
 
@@ -45,12 +60,12 @@ int Memory::is_full() {
  *
  * @param[in]  q     Queue of pages 
  */
-void printQueue(queue<Page> q)
+void printQueue(list<Page> q)
 {
 	//printing content of queue 
 	while (!q.empty()){
 		q.front().print();
-		q.pop();
+		q.pop_front();
 	}
 }
 

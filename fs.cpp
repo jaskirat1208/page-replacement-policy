@@ -23,8 +23,10 @@ void FS::insert(Page page) {
 	// in case memory is full, remove the last page and update it in the disk
 	if (this->mem->is_full())
 	{
+		cout<<"Memory is full. Writing LRU page to disk"<<endl;
 		// Remove the last page and update it in the disk
 		Page lru_page = this->mem->remove();
+		lru_page.print();
 
 		// Disk update code goes here
 		this->disk->update(lru_page);
