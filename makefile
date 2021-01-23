@@ -1,7 +1,9 @@
-compile: 
-	g++ main.cpp fs.cpp page.cpp memory.cpp disk.cpp -o main
-
 all:
-	make compile
-	./a.out
+	mkdir -p bin
+	make _compile 
 
+_compile:
+	g++ src/main.cpp -o bin/main
+
+clean:
+	rm -rf bin
