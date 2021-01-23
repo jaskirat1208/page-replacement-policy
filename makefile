@@ -4,7 +4,7 @@ all:
 	make _docs
 
 _compile:
-	g++ src/main.cpp -o bin/main
+	g++ -std=c++14 src/main.cpp -o bin/main
 
 _docs:
 	doxygen page-replacement-policy
